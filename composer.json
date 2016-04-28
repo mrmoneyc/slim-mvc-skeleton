@@ -1,0 +1,26 @@
+{
+    "name": "mrmoneyc/slim-mvc-skeleton",
+    "description": "Slim Framework 3 skeleton.",
+    "license": "MIT",
+    "type": "project",
+    "keywords": ["slim-framework", "skeleton", "mvc", "sqlite"],
+    "authors": [
+        {
+            "name": "Chun-Ping Chang",
+            "email": "mmc@mrmoneyc.org",
+            "homepage": "http://mrmoneyc.org"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "App\\Controller\\": "app/controllers",
+            "App\\Model\\": "app/models"
+        }
+    },
+    "require": {
+        "slim/slim": "~3.0",
+        "slim/twig-view": "^2.1",
+        "monolog/monolog": "^1.17",
+        "fpdo/fluentpdo": "^1.0"
+    }
+}

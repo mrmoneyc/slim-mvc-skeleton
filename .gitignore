@@ -1,0 +1,7 @@
+vendor/
+storage/logs/*.log
+storage/cache/*
+storage/db/*.sqlite
+composer.lock
+.vscode/
+.DS_Store
