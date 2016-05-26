@@ -24,6 +24,12 @@ Base on https://github.com/vhchung/slim3-skeleton-mvc
 2. `$ cd YOUR_APP_NAME`
 3. `$ phpcs`
 
+### Run test
+
+1. Install [PHPUnit] (https://phpunit.de/)
+2. `$ cd YOUR_APP_NAME`
+3. `$ phpunit`
+
 ### Notice
 
 Set `storage/` folder permission to writable when deploy to production environment
