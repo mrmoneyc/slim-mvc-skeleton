@@ -3,22 +3,28 @@ namespace App\Controller;
 
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
-use App\Model\ConfigurationModel as Configuration;
 
-final class SystemController extends BaseController
+final class SystemController
 {
+    protected $logger;
+    protected $cfgModel;
+    
+    public function __construct($logger, $cfgModel)
+    {
+        $this->logger = $logger;
+        $this->cfgs = $cfgModel;
+    }
+    
     public function getConfig(Request $request, Response $response, $args)
     {
-        $data = array();
+        $data = [];
         $this->logger->info("Action: Get Configuration from DB");
         
         try {
-            $cfgs = new Configuration($this->c);
-            
             if (isset($args['id'])) {
-                $data = $cfgs->getConfigById($args['id']);
+                $data = $this->cfgs->getConfigById($args['id']);
             } else {
-                $data = $cfgs->getAllConfig();
+                $data = $this->cfgs->getAllConfig();
             }
         } catch (\Exception $e) {
             echo $e->getMessage();
@@ -33,11 +39,11 @@ final class SystemController extends BaseController
     {
         $this->logger->info("Action: Get Application Version");
         
-        $appVersion = array(
+        $appVersion = [
             'version' => APP_VERSION,
             'build' => APP_BUILD,
             'fullVersion' => 'V' . APP_VERSION . '(' . APP_BUILD . ')'
-        );
+        ];
         
         return $response->withJson($appVersion);
     }

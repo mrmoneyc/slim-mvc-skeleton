@@ -53,13 +53,40 @@ $container['logger'] = function ($container) {
 };
 
 // -----------------------------------------------------------------------------
+// Model factories
+// -----------------------------------------------------------------------------
+$container['cfgModel'] = function ($container) {
+    $settings = $container->get('settings');
+    $cfgModel = new App\Model\ConfigurationModel($container->get('pdo'));
+    return $cfgModel;
+};
+
+$container['cfgModelFPDO'] = function ($container) {
+    $settings = $container->get('settings');
+    $cfgModelFPDO = new App\Model\ConfigurationModelFPDO($container->get('fpdo'));
+    return $cfgModelFPDO;
+};
+
+$container['cfgModelMock'] = function ($container) {
+    $settings = $container->get('settings');
+    $cfgModelMock = new App\Model\ConfigurationModelMock();
+    return $cfgModelMock;
+};
+
+// -----------------------------------------------------------------------------
 // Controller factories
 // -----------------------------------------------------------------------------
 
 $container['App\Controller\IndexController'] = function ($container) {
-    return new App\Controller\IndexController($container);
+    $view = $container->get('view');
+    $logger = $container->get('logger');
+    return new App\Controller\IndexController($view, $logger);
 };
 
-$container['App\Controller\ConfigController'] = function ($container) {
-    return new App\Controller\ConfigController($container);
+$container['App\Controller\SystemController'] = function ($container) {
+    $logger = $container->get('logger');
+    $cfgModel = $container->get('cfgModel');
+    // $cfgModel = $container->get('cfgModelFPDO');
+    // $cfgModel = $container->get('cfgModelMock');
+    return new App\Controller\SystemController($logger, $cfgModel);
 };

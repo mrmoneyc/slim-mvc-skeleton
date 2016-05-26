@@ -1,16 +1,12 @@
 <?php
 namespace App\Model;
 
-use Slim\Container;
-
 class BaseModel
 {
     protected $db;
-    protected $logger;
 
-    public function __construct(Container $container)
+    public function __construct($db)
     {
-        $this->db = $container->get('pdo');
-        $this->logger = $container->get('logger');
+        $this->db = $db;
     }
 }
